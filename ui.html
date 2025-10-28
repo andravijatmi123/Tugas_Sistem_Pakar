@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pakar Tanaman Tomat</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            color: #2c5d3d;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        #symptom-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        #symptom-list label {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #symptom-list label:hover {
+            background-color: #f0f0f0;
+        }
+        #symptom-list input {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Tombol sekunder untuk "Lihat Kemungkinan Lain" */
+        button.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            margin-top: 15px;
+        }
+        button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+        #results-container article {
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            border-left: 5px solid #4CAF50;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        #results-container h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        #results-container p {
+            margin-bottom: 5px;
+        }
+        #loading {
+            text-align: center;
+            font-style: italic;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sistem Pakar Diagnosa Hama & Penyakit Tanaman Tomat</h1>
+        <p>Berdasarkan Jurnal: "Penerapan Metode Certainty Factor pada Sistem Pakar Diagnosa Hama dan Penyakit pada Tanaman Tomat".</p>
+
+        <form id="diagnosis-form">
+            <h2>Pilih Gejala yang Teramati:</h2>
+            <div id="symptom-list-container">
+                <div id="symptom-list">
+                    <p>Memuat gejala...</p>
+                </div>
+            </div>
+            <button type="submit">Diagnosa Sekarang</button>
+        </form>
+
+        <h2>Hasil Diagnosa</h2>
+        <div id="loading">Menganalisis...</div>
+        <div id="results-container">
+            <p>Hasil diagnosa akan muncul di sini setelah Anda memilih gejala dan menekan tombol "Diagnosa Sekarang".</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { //
+            const symptomListDiv = document.getElementById('symptom-list'); //
+            const diagnosisForm = document.getElementById('diagnosis-form'); //
+            const resultsContainer = document.getElementById('results-container'); //
+            const loadingDiv = document.getElementById('loading'); //
+
+            // 1. Memuat daftar gejala dari server
+            fetch('/get_symptoms') //
+                .then(response => response.json()) //
+                .then(symptoms => { //
+                    symptomListDiv.innerHTML = ''; //
+                    symptoms.forEach(symptom => { //
+                        const label = document.createElement('label'); //
+                        const checkbox = document.createElement('input'); //
+                        checkbox.type = 'checkbox'; //
+                        checkbox.value = symptom.id; //
+                        checkbox.id = symptom.id; //
+                        
+                        label.appendChild(checkbox); //
+                        label.appendChild(document.createTextNode(symptom.name)); //
+                        label.htmlFor = symptom.id; //
+                        
+                        symptomListDiv.appendChild(label); //
+                    });
+                })
+                .catch(error => { //
+                    console.error('Error memuat gejala:', error); //
+                    symptomListDiv.innerHTML = '<p style="color: red;">Gagal memuat daftar gejala. Coba muat ulang halaman.</p>'; //
+                });
+
+            // 2. Menangani submit form
+            diagnosisForm.addEventListener('submit', (event) => { //
+                event.preventDefault(); //
+                
+                const selectedSymptoms = []; //
+                const checkboxes = document.querySelectorAll('#symptom-list input[type="checkbox"]:checked'); //
+                checkboxes.forEach(cb => { //
+                    selectedSymptoms.push(cb.value); //
+                });
+
+                if (selectedSymptoms.length === 0) { //
+                    resultsContainer.innerHTML = '<p style="color: orange;">Silakan pilih minimal satu gejala.</p>'; //
+                    return; //
+                }
+
+                loadingDiv.style.display = 'block'; //
+                resultsContainer.innerHTML = ''; //
+
+                // 3. Kirim data gejala ke server
+                fetch('/diagnose', { //
+                    method: 'POST', //
+                    headers: { //
+                        'Content-Type': 'application/json', //
+                    },
+                    body: JSON.stringify({ symptoms: selectedSymptoms }), //
+                })
+                .then(response => response.json()) //
+                .then(results => { //
+                    loadingDiv.style.display = 'none'; //
+                    
+                    // --- MODIFIKASI DIMULAI ---
+                    displayResults(results); // Panggil fungsi baru
+                    // --- MODIFIKASI SELESAI ---
+                    
+                    checkboxes.forEach(cb => { //
+                        cb.checked = false; //
+                    });
+                })
+                .catch(error => { //
+                    loadingDiv.style.display = 'none'; //
+                    console.error('Error diagnosa:', error); //
+                    resultsContainer.innerHTML = '<p style="color: red;">Terjadi kesalahan saat mendiagnosa.</p>'; //
+                });
+            });
+
+
+
+            // 4. Fungsi pembantu untuk membuat elemen artikel hasil
+            function createResultArticle(result) {
+                const article = document.createElement('article'); //
+                
+                let symptomsHtml = '<ul>'; //
+                result.matched_symptoms.forEach(symptom => { //
+                    symptomsHtml += `<li>${symptom}</li>`; //
+                });
+                symptomsHtml += '</ul>'; //
+
+                article.innerHTML = `
+                    <h3>${result.disease_name}</h3>
+                    <p><strong>Tingkat Keyakinan: ${result.confidence.toFixed(2)}% (CF: ${result.cf_value.toFixed(3)})</strong></p>
+                    <p><strong>Solusi:</strong></p>
+                    <p>${result.solution.replace(/\n/g, '<br>')}</p>
+                    <p><strong>Gejala Cocok:</strong></p>
+                    ${symptomsHtml}
+                `; //
+                return article;
+            }
+
+            // 5. Fungsi baru untuk menampilkan hasil (menggantikan yang lama)
+            function displayResults(results) {
+                // Hapus hasil lama (sudah dilakukan di event listener, tapi aman untuk dilakukan lagi)
+                resultsContainer.innerHTML = ''; //
+
+                if (results.length === 0) { //
+                    resultsContainer.innerHTML = '<p>Tidak ditemukan diagnosa yang cocok berdasarkan gejala yang dipilih.</p>'; //
+                    return; //
+                }
+
+                // 1. Tampilkan hasil teratas
+                const topResult = results[0];
+                resultsContainer.appendChild(createResultArticle(topResult));
+
+                // 2. Siapkan sisa hasil
+                const otherResults = results.slice(1);
+                
+                if (otherResults.length > 0) {
+                    // Buat tombol "Lihat Kemungkinan Lain"
+                    const showMoreButton = document.createElement('button');
+                    showMoreButton.textContent = `Lihat ${otherResults.length} kemungkinan lain`;
+                    showMoreButton.className = 'secondary'; // Terapkan style tombol sekunder
+
+                    // Buat kontainer tersembunyi untuk sisa hasil
+                    const otherResultsContainer = document.createElement('div');
+                    otherResultsContainer.style.display = 'none';
+
+                    // Isi kontainer tersembunyi
+                    otherResults.forEach(result => {
+                        otherResultsContainer.appendChild(createResultArticle(result));
+                    });
+
+                    // Tambahkan event listener ke tombol
+                    showMoreButton.addEventListener('click', () => {
+                        otherResultsContainer.style.display = 'block'; // Tampilkan sisa hasil
+                        showMoreButton.style.display = 'none'; // Sembunyikan tombol
+                    });
+
+                    // Tambahkan tombol dan kontainer ke halaman
+                    resultsContainer.appendChild(showMoreButton);
+                    resultsContainer.appendChild(otherResultsContainer);
+                }
+            }
+            
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+{
+  "symptoms": [
+    {"id": "G1", "name": "Terdapat warna kecoklatan atau keunguan pada daun, tangkai, buah dan batang"},
+    {"id": "G2", "name": "Tanaman mengeluarkan bau busuk"},
+    {"id": "G3", "name": "Muncul bercak hitam konsektrik"},
+    {"id": "G4", "name": "Bercak kecil hingga bercak membesar muncul pada daun dan buah"},
+    {"id": "G5", "name": "Serangan terjadi pada daun atau buah yang masih muda"},
+    {"id": "G6", "name": "Terdapat bercak berair pada daun atau buah yang masih muda"},
+    {"id": "G7", "name": "Tanaman roboh"},
+    {"id": "G8", "name": "Beberapa daun layu secara mendadak"},
+    {"id": "G9", "name": "Layu pada cuaca panas di siang hari dan segar kembali di pagi dan sore hari"},
+    {"id": "G10", "name": "Tanaman perlahan layu hingga mengering"},
+    {"id": "G11", "name": "Pada batang terbentuk akar adventif"},
+    {"id": "G12", "name": "Tanaman layu"},
+    {"id": "G13", "name": "Pada batang terjadi pembentukan miselium/jamur berwarna putih"},
+    {"id": "G14", "name": "Daun menguning"},
+    {"id": "G15", "name": "Sisi atas daun terdapat bercak kuning"},
+    {"id": "G16", "name": "Sisi bawah tampak bercak ungu kehijauan"},
+    {"id": "G17", "name": "Daun mengering"},
+    {"id": "G18", "name": "Pangkal batang mengecil"},
+    {"id": "G19", "name": "Akar membusuk"},
+    {"id": "G20", "name": "Pangkal batang membusuk"},
+    {"id": "G21", "name": "Daun membentuk mosaik berwarna hijau muda dan hijau tua dengan bercak menguning"},
+    {"id": "G22", "name": "Daun muda berkerut dan keriting"},
+    {"id": "G23", "name": "Tanaman kerdil"},
+    {"id": "G24", "name": "Akar serabut tidak normal dan terdapat bulatan kecil seperti bisul berwarna putih"},
+    {"id": "G25", "name": "Daun tanaman terdapat bercak putih"},
+    {"id": "G26", "name": "Terdapat larva dibagian tepi daun"},
+    {"id": "G27", "name": "Ujung ranting terdapat tusukan berwarna coklat"},
+    {"id": "G28", "name": "Pucuk tanaman kering"},
+    {"id": "G29", "name": "Bunga layu dan menghitam"},
+    {"id": "G30", "name": "Buah busuk dan terdapat larva"},
+    {"id": "G31", "name": "Buah berlubang"},
+    {"id": "G32", "name": "Buah rontok"},
+    {"id": "G33", "name": "Terdapat bercak putih pada daun"},
+    {"id": "G34", "name": "Daun berlubang"},
+    {"id": "G35", "name": "Terdapat bekas gigitan dipermukaan daun"},
+    {"id": "G36", "name": "Pangkal batang terdapat bekas gigitan"},
+    {"id": "G37", "name": "Terdapat ulat menggulung disekitar tanaman"}
+  ],
+  "diseases": [
+    {
+      "id": "P1",
+      "name": "Busuk (Phytophtora infestans de Barry)",
+      "solution": "Tanaman tomat yang terserang penyakit busuk dapat ditanangani dengan melakukan rotasi tanaman dan penyemprotan fungisida seperti Difolatan (Kaptanol) dan pestisida yang mengandung Tomafol 80 WP (Kaptanol), Dithane M-45 (mancozeb) dengan kadar 0,25% 0,3%. Penyemprotan dimulai setelah tanaman berumur 2 minggu dengan jangka waktu 2 minggu sekali juga dapat menggunakan Manzete-D (mancozeb) dan Daconil (Klorotalonil) 0,15% -0.30%.",
+      "rules": {
+        "G1": {"mb": 0.8, "md": 0.0},
+        "G2": {"mb": 0.4, "md": 0.2},
+        "G3": {"mb": 0.6, "md": 0.2}
+      }
+    },
+    {
+      "id": "P2",
+      "name": "Bercak (Alternaria solani Sor.)",
+      "solution": "Tanaman tomat yang terkena bercak dapat ditangani dengan membuang bagian yang terkena bercak, hindari penyiraman dari atas untuk mengindaari kelembapan (sebaiknya gunakan sistem irigasi tetes). selain itu semprot tanaman dengan fungisida seperti: Mancozeb, Chlorothanonil, Azoxystrobin, atau Difenoconazole.",
+      "rules": {
+        "G3": {"mb": 0.8, "md": 0.2},
+        "G4": {"mb": 0.6, "md": 0.2},
+        "G5": {"mb": 0.6, "md": 0.4}
+      }
+    },
+    {
+      "id": "P3",
+      "name": "Busuk Lunak Bakteri / Busuk Batang (Erwinia carotovora)",
+      "solution": "Cara penanganannya adalah dengan cara mencabut tanaman yang terkena infeksi agar tidak menular, kurangi kelembabpan dengan menempatkan tanaman tidak terlalu rapat. serta gunakan semprot bakterisida seperti Copper Oxychloride, Copper Hydroxide, dan Streptomosin Sulfat.",
+      "rules": {
+        "G2": {"mb": 1.0, "md": 0.2},
+        "G6": {"mb": 0.4, "md": 0.6},
+        "G7": {"mb": 0.8, "md": 0.4}
+      }
+    },
+    {
+      "id": "P4",
+      "name": "Layu Bakteri (Pseudomonas / Rolstonia Solanacearum)",
+      "solution": "Cara Penanganannya adalah membuang tanaman yang terinfeksi agar tidak menular. Jaga pH tanah stabil di 6,0 sampai 6,5.",
+      "rules": {
+        "G8": {"mb": 1.0, "md": 0.2},
+        "G9": {"mb": 0.8, "md": 0.4},
+        "G10": {"mb": 0.6, "md": 0.2},
+        "G11": {"mb": 0.6, "md": 0.4}
+      }
+    },
+    {
+      "id": "P5",
+      "name": "Layu Fusarium (Fusarium Oxysporum)",
+      "solution": "Cara penanganannya adalah dengan mencabut tanaman yang terinfeksi agar tidak menyebar, perbaiki drainase dan arerasi tanah, jaga pH agartetap stabil di angka 6,5 sampai 7,0(pH netral). serta hindari pemupukan nitrogen berlebih.",
+      "rules": {
+        "G11": {"mb": 0.6, "md": 0.2},
+        "G12": {"mb": 0.8, "md": 0.2},
+        "G13": {"mb": 1.0, "md": 0.2},
+        "G14": {"mb": 0.6, "md": 0.4}
+      }
+    },
+    {
+      "id": "P6",
+      "name": "Kapang Daun (Fulvia Fuva (Cke.) Cif)",
+      "solution": "Penanganannya adalah dengan melakukan membuang tanaman yang terinfeksi, kurangi kelembapan (udara <85%), perhatikan sirkulasi udaara. serta guanakan fungisida seperti Chlorothanonil, Mancozeb, Azoxystrobin, dan Difenoconazole.",
+      "rules": {
+        "G15": {"mb": 0.8, "md": 0.2},
+        "G16": {"mb": 0.8, "md": 0.2},
+        "G17": {"mb": 0.6, "md": 0.4}
+      }
+    },
+    {
+      "id": "P7",
+      "name": "Cekik (Phytium ultimu)",
+      "solution": "Penanganannya dengan cara membuang tanaman yang terinfeksi, serta menjaga tanaman agar tidak terlalu basah (hindari genangan air di sekitar batang). gunakan fungisida preventif seperti Metalaxyl, Propamocrab Hydrochloride, dan Fosetil-Alumunium. Taburkan Trichoderma sp. atau Gliocladium sp. untuk menekan jamur pantogen. jaga suhu (20-25 derajat celcius). dan jangan menggunakan pupuk kompos mentah karena bisa membawa spora Pythium",
+      "rules": {
+        "G12": {"mb": 0.8, "md": 0.4},
+        "G18": {"mb": 0.8, "md": 0.6},
+        "G19": {"mb": 0.6, "md": 0.2},
+        "G20": {"mb": 0.8, "md": 0.2}
+      }
+    },
+    {
+      "id": "P8",
+      "name": "Tomato Mozaik Virus (TMV)",
+      "solution": "Cara penanganannya adalah mencabut tanaman yang terinfeksi, tanaman yang terkena virus ini sangat mudah menyebar ke tanaman lain sehingga disarankan untuk tidak menyentuh tanaman lain setelah mencabut tanaman yang terinfeksi. kemudian sterilkan alat setelah menangani tanaman terinfrksi. hindari merokok di dekat tanaman karena tembakau bisa membawa partikel virus TMV",
+      "rules": {
+        "G21": {"mb": 1.0, "md": 0.2},
+        "G22": {"mb": 0.8, "md": 0.2},
+        "G23": {"mb": 0.6, "md": 0.4}
+      }
+    },
+    {
+      "id": "P9",
+      "name": "Nematoda Akar (Heterodera marioni/ Meloidogyne javanice)",
+      "solution": "Penanganannya adalah ddengan cara membuang tanaman yang terinfeksi. lakukan solarisasi tanah (bungkus tanah dengan plastik dan jemur selama 4-6 minggu untuk mematikan telur dan larva nematoda). gunakan mulsa organik untuk menekan suhu dan kelembapan tanah.gunakan nematisida speerti Carbofuran, Fenamiphos, Abametcin. serta menjaga pH tanah netral (6,5-7,0).",
+      "rules": {
+        "G7": {"mb": 0.4, "md": 0.6},
+        "G12": {"mb": 0.4, "md": 0.8},
+        "G23": {"mb": 1.0, "md": 0.2},
+        "G24": {"mb": 1.0, "md": 0.2}
+      }
+    },
+    {
+      "id": "P10",
+      "name": "Penggerek Daun (Liriomyza sative Blancard)",
+      "solution": "Capa penanganannya adalah dengan mebuang/memangkas bagian daun yang terdapat lorong bekas gerekan (untuk memusnahkan larva). Gunakan Parasitoid Opius sp., Diglyphus isaea, atau Hemiptarsenus varicornis untuk menekan larva dalam daun. jaga kebersihan lahan, dan gunakan mulsa.",
+      "rules": {
+        "G17": {"mb": 0.4, "md": 0.8},
+        "G25": {"mb": 1.0, "md": 0.2},
+        "G26": {"mb": 0.6, "md": 0.2}
+      }
+    },
+    {
+      "id": "P11",
+      "name": "Kepik Tomat (Nesidiocoris (Crytopeltis) tenuis)",
+      "solution": "jiak populasi kepik terlalu banyak, semprot dengan insektisida selektif seperti Abametcin, Spinosad, Cypermethirin. jaga keseimabnagan ekosistem pada lahan, dan buang pucuk yang rusak.",
+      "rules": {
+        "G27": {"mb": 1.0, "md": 0.2},
+        "G28": {"mb": 0.6, "md": 0.4},
+        "G29": {"mb": 0.4, "md": 0.8}
+      }
+    },
+    {
+      "id": "P12",
+      "name": "Lalat Buah (Bactocera cucurbitae (Coquillet))",
+      "solution": "Dapat diatasi dengan cara membuang buah yang terserang (busuk, berlubang, atau rontok). Gunakan perangkap protein hidrosilat dan insektisida. usahakan bungkus buah muda dengan plastik agar lalat tidak meeletakan telur pada buah. dan lakukan sanitasi kebun secara rutin.",
+      "rules": {
+        "G30": {"mb": 1.0, "md": 0.2},
+        "G31": {"mb": 0.8, "md": 0.4},
+        "G32": {"mb": 0.8, "md": 0.2}
+      }
+    },
+    {
+      "id": "P13",
+      "name": "Ulat Grayak (Spodoptera liture F.)",
+      "solution": "Cara penanganannya adalah dengan memusnahkan telur dan ulat secara manual di bawah daun atau di pangkal tanaman. gunakan bioinsekisida seperti Bacillus Thuringiensis (Bt), Beauveria Bassiana atau Metarhizium Anisopliae (jamur entomopatogen). guanakan insektisida kimia jika serangan berat seperti Emametcin Benzonate, Spinetoram, Indoxarceb, dan Chlorantraniliprole. serta menjaga kebersihan lahan.",
+      "rules": {
+        "G31": {"mb": 0.8, "md": 0.4},
+        "G33": {"mb": 0.4, "md": 0.6},
+        "G34": {"mb": 0.6, "md": 0.2},
+        "G35": {"mb": 0.4, "md": 0.6}
+      }
+    },
+    {
+      "id": "P14",
+      "name": "Ulat Tanah (Agrotis ipsilon)",
+      "solution": "Cara penanganannya adalah memusnahkan ulat secara manual, gemburkan tanah sebelum menanam, bersihkan lahan dari sisa gulma. gunakan lampu perangkap untuk menarik perhatian ngengat pada malam hari. serta bisa menggunakan insektisida jika sudah terlalu parah (Emametcin, Spinosad, Indoxcarb).",
+      "rules": {
+        "G36": {"mb": 1.0, "md": 0.2},
+        "G37": {"mb": 1.0, "md": 0.2}
+      }
+    }
+  ]
+}
